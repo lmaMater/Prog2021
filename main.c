@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 
+const int BUF_SIZE = 1024;
 
 int ToSeconds(int days, int hours, int minutes, int seconds) {
     return seconds + minutes * 60 + hours * 3600 + days * 86400;
@@ -9,7 +10,7 @@ int ToSeconds(int days, int hours, int minutes, int seconds) {
 
 int stringToSeconds(char *str) {
     int day, hour, min, sec;
-    for (int i = 0; i < 1024; i++) {
+    for (int i = 0; i < BUF_SIZE; i++) {
         if (str[i] == '[') {
             int x = 0;
             x += i;
@@ -35,13 +36,13 @@ int stringToSeconds(char *str) {
 }
 
 void outErrors(char c) {
-    char line[1024];
+    char line[BUF_SIZE];
     char *str;
     FILE *input = fopen("access_log.txt", "r");
-    str = fgets(line, 1024, input);
+    str = fgets(line, BUF_SIZE, input);
     while (str != NULL) {
         int flag = 0;
-        for (int i = 0; i < 1024; i++) {
+        for (int i = 0; i < BUF_SIZE; i++) {
             if (str[i] == '\"' && flag == 1) {
                 if (str[i + 2] == c) {
                     printf("%s", str);
@@ -53,7 +54,7 @@ void outErrors(char c) {
                 flag += 1;
             }
         }
-        str = fgets(line, 1024, input);
+        str = fgets(line, BUF_SIZE, input);
     }
     fclose(input);
 }
@@ -70,14 +71,14 @@ int main() {
 
     int timeWindow = secTimeWindow + minTimeWindow * 60
                      + hourTimeWindow * 3600 + dayTimeWindow * 86400;
-    char line[1024];
+    char line[BUF_SIZE];
     char *str;
 
     FILE *input = fopen("access_log.txt", "r");
-    str = fgets(line, 1024, input);
+    str = fgets(line, BUF_SIZE, input);
     int curSeconds = stringToSeconds(str);
     int firstTimeMaxCount = 0, lastTimeMaxCount = 0, maxCount = 0,
-            countElementInArr = -1, arrLength = 1024;
+            countElementInArr = -1, arrLength = BUF_SIZE;
     int count = 0, firstTime = curSeconds,
             lastTime = curSeconds, indexFirstElementInArr = 0;
     int *arr = (int *) malloc(arrLength * sizeof(int));
@@ -128,7 +129,7 @@ int main() {
 
         }
 
-        str = fgets(line, 1024, input);
+        str = fgets(line, BUF_SIZE, input);
         if (str != NULL) {
             curSeconds = stringToSeconds(str);
         } else {
@@ -140,12 +141,12 @@ int main() {
             break;
         }
     }
-    
+
     printf("Maximum request number: %d\n", maxCount);
-    
+
     int dayLast, hourLast, minLast, secLast;
     int dayFirst, hourFirst, minFirst, secFirst;
-    
+
     secFirst = firstTimeMaxCount % 60;
     firstTimeMaxCount /= 60;
     minFirst = firstTimeMaxCount % 60;
@@ -153,10 +154,10 @@ int main() {
     hourFirst = firstTimeMaxCount % 60;
     firstTimeMaxCount /= 24;
     dayFirst = firstTimeMaxCount % 24;
-    printf("First Time: 1995 %d Jul %d:%d:%d\n", 
+    printf("First Time: 1995 %d Jul %d:%d:%d\n",
            dayFirst, hourFirst % 24,
            minFirst % 60, secFirst % 60);
-    
+
     secLast = lastTimeMaxCount % 60;
     lastTimeMaxCount /= 60;
     minLast = lastTimeMaxCount % 60;
@@ -164,11 +165,11 @@ int main() {
     hourLast = lastTimeMaxCount % 60;
     lastTimeMaxCount /= 24;
     dayLast = lastTimeMaxCount % 24;
-    printf("Last Time: 1995 %d Jul %d:%d:%d\n", 
+    printf("Last Time: 1995 %d Jul %d:%d:%d\n",
            dayLast, hourLast % 24,
            minLast % 60, secLast % 60);
-    
+
     free(arr);
-    
+
     return 0;
 }
