@@ -21,6 +21,6 @@ jobs:
             sudo cp *.a /usr/lib
       - name: Run googletest
         run: |
-            g++ ./test.cpp -o ./test -lgtest -lpthread
+            gcc ./test.cpp -o ./test -lgtest -lpthread
             ./test
             - run: echo "🍏 This job's status is ${{ job.status }}."
