@@ -3,11 +3,11 @@
 #include <stdlib.h>
 
 
-int ToSecond(int day, int hour, int min, int sec) {
-    return sec + min * 60 + hour * 3600 + day * 86400;
+int ToSeconds(int days, int hours, int minutes, int seconds) {
+    return seconds + minutes * 60 + hours * 3600 + days * 86400;
 }
 
-int stringToSecond(char *str) {
+int stringToSeconds(char *str) {
     int day, hour, min, sec;
     for (int i = 0; i < 1024; i++) {
         if (str[i] == '[') {
@@ -31,7 +31,7 @@ int stringToSecond(char *str) {
             break;
         }
     }
-    ToSecond(day, hour, min, sec);
+    ToSeconds(day, hour, min, sec);
 }
 
 void outErrors(char c) {
@@ -75,7 +75,7 @@ int main() {
 
     FILE *input = fopen("access_log.txt", "r");
     str = fgets(line, 1024, input);
-    int curSeconds = stringToSecond(str);
+    int curSeconds = stringToSeconds(str);
     int firstTimeMaxCount = 0, lastTimeMaxCount = 0, maxCount = 0,
             countElementInArr = -1, arrLength = 1024;
     int count = 0, firstTime = curSeconds,
@@ -130,7 +130,7 @@ int main() {
 
         str = fgets(line, 1024, input);
         if (str != NULL) {
-            curSeconds = stringToSecond(str);
+            curSeconds = stringToSeconds(str);
         } else {
             if (count > maxCount) {
                 maxCount = count;
@@ -140,9 +140,12 @@ int main() {
             break;
         }
     }
+    
     printf("Maximum request number: %d\n", maxCount);
+    
     int dayLast, hourLast, minLast, secLast;
     int dayFirst, hourFirst, minFirst, secFirst;
+    
     secFirst = firstTimeMaxCount % 60;
     firstTimeMaxCount /= 60;
     minFirst = firstTimeMaxCount % 60;
@@ -150,8 +153,10 @@ int main() {
     hourFirst = firstTimeMaxCount % 60;
     firstTimeMaxCount /= 24;
     dayFirst = firstTimeMaxCount % 24;
-    printf("First Time: 1995 %d Jul %d:%d:%d\n", dayFirst, hourFirst % 24,
+    printf("First Time: 1995 %d Jul %d:%d:%d\n", 
+           dayFirst, hourFirst % 24,
            minFirst % 60, secFirst % 60);
+    
     secLast = lastTimeMaxCount % 60;
     lastTimeMaxCount /= 60;
     minLast = lastTimeMaxCount % 60;
@@ -159,8 +164,11 @@ int main() {
     hourLast = lastTimeMaxCount % 60;
     lastTimeMaxCount /= 24;
     dayLast = lastTimeMaxCount % 24;
-    printf("Last Time: 1995 %d Jul %d:%d:%d\n", dayLast, hourLast % 24,
+    printf("Last Time: 1995 %d Jul %d:%d:%d\n", 
+           dayLast, hourLast % 24,
            minLast % 60, secLast % 60);
+    
     free(arr);
+    
     return 0;
 }
