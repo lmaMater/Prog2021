@@ -2,14 +2,11 @@
 #include <inttypes.h>
 #include <string.h>
 
-
 const uint64_t base = 4294967296;
-
 
 typedef struct uint {
     unsigned int elements[32];
 } uint1024_t;
-
 
 uint1024_t from_uint(unsigned int x) {
     uint1024_t result;
@@ -20,7 +17,6 @@ uint1024_t from_uint(unsigned int x) {
     }
     return result;
 }
-
 
 uint1024_t add_op(uint1024_t x, uint1024_t y) {
     uint1024_t result;
@@ -34,7 +30,6 @@ uint1024_t add_op(uint1024_t x, uint1024_t y) {
     }
     return result;
 }
-
 
 uint1024_t max(uint1024_t x, uint1024_t y) {
 
@@ -50,7 +45,6 @@ uint1024_t max(uint1024_t x, uint1024_t y) {
     return x;
 }
 
-
 int equal(uint1024_t x, uint1024_t y) {
 
     for (int i = 31; i >= 0; i--) {
@@ -60,7 +54,6 @@ int equal(uint1024_t x, uint1024_t y) {
     }
     return 1;
 }
-
 
 uint1024_t subtr_op(uint1024_t x, uint1024_t y) {
 
@@ -87,7 +80,6 @@ uint1024_t subtr_op(uint1024_t x, uint1024_t y) {
     return result;
 }
 
-
 uint1024_t mult_op(uint1024_t x, uint1024_t y) {
     uint1024_t result = from_uint(0);
 
@@ -111,7 +103,6 @@ uint1024_t mult_op(uint1024_t x, uint1024_t y) {
     return result;
 }
 
-
 void scanf_value(uint1024_t *x) {
     char line[310];
     uint1024_t y = from_uint(0);
@@ -124,7 +115,6 @@ void scanf_value(uint1024_t *x) {
         x->elements[i] = y.elements[i];
     }
 }
-
 
 void printf_value(uint1024_t x) {
     uint1024_t res = from_uint(0);
