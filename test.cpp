@@ -1,6 +1,6 @@
-#include <gtest/gtest.h>
+#include "pch.h"
 extern "C" {
-#include "lab2.c"
+#include "lab2.h"
 }
 
 TEST(TestMain, Test1) {
