@@ -8,7 +8,7 @@
 const uint64_t base = 4294967296;
 
 
-typedef struct uint {
+typedef struct {
     unsigned int elements[32];
 } uint1024_t;
 
