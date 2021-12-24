@@ -1,7 +1,7 @@
 /* CHECK */
 
 
-int check_argc(int argc) {
+int checkArgc(int argc) {
     if (argc != 3) {
         printf("! Wrong input !\n");
         printf("Retry in this format:\n");
@@ -11,7 +11,7 @@ int check_argc(int argc) {
     return 0;
 }
 
-int check_file(void *input_file) {
+int checkFile(void *input_file) {
     if (input_file == NULL) {
         printf("Wrong file format\n");
         return 1;
@@ -19,7 +19,7 @@ int check_file(void *input_file) {
     return 0;
 }
 
-void wrong_option_warning() {
+void wrongOptionWarning() {
     printf("! Wrong option format !\n");
     printf("Input -l for number of lines\n");
     printf("Input -c for number of bytes\n");

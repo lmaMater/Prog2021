@@ -4,12 +4,12 @@
 #include "check.h"
 
 int main(int argc, char *argv[]) {
-    if (check_argc(argc) == 1) {
+    if (checkArgc(argc) == 1) {
         return 1;
     }
 
     FILE *input_file = fopen(argv[argc - 1], "r");
-    if (check_file(input_file) == 1) {
+    if (checkFile(input_file) == 1) {
         return 1;
     }
 
@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
     } else if (strcmp(argv[1], "-w") == 0) {
         printf("number of words: %d\n", words(input_file));
     } else {
-        wrong_option_warning();
+        wrongOptionWarning();
         return 1;
     }
 
