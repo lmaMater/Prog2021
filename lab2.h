@@ -132,7 +132,7 @@ int printf_value(uint1024_t x, char* ans) {
     uint1024_t res = from_uint(0);
     uint1024_t null = from_uint(0);
     if (memcmp(&x, &null, sizeof(int) * 32) == 0) {
-        ans = "0";
+        ans[0] = '0';
         return 1;
     }
     char line[310];
