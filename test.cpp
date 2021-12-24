@@ -1,5 +1,4 @@
-#pragma once
-#include "gtest/gtest.h"
+#include "pch.h"
 extern "C" {
 #include "lab2.h"
 }
