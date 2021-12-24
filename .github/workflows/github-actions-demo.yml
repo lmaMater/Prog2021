@@ -20,7 +20,7 @@ jobs:
             cd lib
             sudo cp *.a /usr/lib
       - name: Run googletest
-	run: |
-	    g++ ./test.cpp -o ./test -lgtest -lpthread
-	    ./test
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+        run: |
+            g++ ./test.cpp -o ./test -lgtest -lpthread
+            ./test
+            - run: echo "🍏 This job's status is ${{ job.status }}."
